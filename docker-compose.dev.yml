@@ -25,7 +25,13 @@ services:
   postgres:
     restart: always
     image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=root
     ports:
       - "5432:5432"
+    container_name: db
     volumes:
       - pgdata:/var/lib/postgresql/data/
+
+volumes:
+  pgdata:
