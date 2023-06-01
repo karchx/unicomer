@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  python-s:
+    build:
+      context: ./docker
+      dockerfile: python-setup.dockerfile
+    container_name: python-setup
+    volumes:
+      - .:/src
+    working_dir: /src
+
+  web:
+    build:
+      context: ./docker
+      dockerfile: python-setup.dockerfile
+    container_name: web-django
+    volumes:
+      - .:/src
+    working_dir: /src
+    ports:
+      - 8001:8000
+    command: python manage.py runserver 0.0.0.0:8000
+
+  postgres:
+    restart: always
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
