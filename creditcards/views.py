@@ -4,28 +4,21 @@ from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from .serializers import AccountsSerializer
-from .models import Accounts
+from .serializers import CreditCardsSerializer 
 
-class Accounts(APIView):
+class CreditCardView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
-        account_id = request.query_params["account_id"]
-        account_instance = Accounts.objects.all()
-
-        return Response({'account': account_instance})
-
     def post(self, request):
         data = {
-              #'owner': request.user.id,
-              'owner': request.data.get('owner'),
-              'balance': request.data.get('currency'),
-              'currency': request.data.get('currency'),
-         }
+            'from_account': request.data.get('account'),
+            'card_number': request.data.get('card_number'),
+            'expiration_date': request.data.get('expiration_date'),
+            'cvc': request.data.get('cvc')
+        }
 
-        serializer = AccountsSerializer(data=data)
+        serializer = CreditCardsSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
