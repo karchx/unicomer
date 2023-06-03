@@ -19,7 +19,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     name = models.CharField("Name", max_length=240)
     lastname = models.CharField("LastName", max_length=240)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=50)
+    password = models.CharField(max_length=250)
     is_active = models.BooleanField(default=True)
     created_at = models.DateField(auto_now_add=True)
 
