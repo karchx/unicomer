@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'users',
     'accounts',
-    'creditcards'
+    'creditcards',
+    'transfers'
 ]
 
 MIDDLEWARE = [
