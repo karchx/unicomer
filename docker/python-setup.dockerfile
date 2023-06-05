@@ -7,4 +7,4 @@ RUN export PATH=/usr/lib/postgresql/X.Y/bin/:$PATH
 ENV TZ=UTC
 
 RUN python3 -m ensurepip
-RUN pip3 install --no-cache --upgrade pip setuptools django psycopg djangorestframework pytz
+RUN pip3 install --no-cache --upgrade pip setuptools django psycopg djangorestframework pytz gunicorn
